@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>💌 Mis Cartas de Amor 💌</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;900&family=Dancing+Script:wght@700&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #ff6b9d 75%, #ffc3a0 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 20s ease infinite;
+            min-height: 100vh;
+            padding: clamp(15px, 4vw, 25px);
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating particles background */
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle-bg {
+            position: absolute;
+            font-size: 28px;
+            opacity: 0;
+            animation: floatBg linear infinite;
+        }
+
+        @keyframes floatBg {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-150px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Animated title */
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(40px, 10vw, 68px);
+            color: white;
+            text-align: center;
+            margin-bottom: clamp(25px, 6vw, 40px);
+            text-shadow: 
+                5px 5px 0 rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(255, 255, 255, 0.5);
+            animation: titleFloat 4s ease-in-out infinite;
+            letter-spacing: 2px;
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { 
+                transform: translateY(0) scale(1); 
+            }
+            50% { 
+                transform: translateY(-15px) scale(1.02); 
+            }
+        }
+
+        /* Header info box */
+        .header-info {
+            background: rgba(255, 255, 255, 0.98);
+            padding: clamp(25px, 6vw, 35px);
+            border-radius: 30px;
+            text-align: center;
+            margin-bottom: clamp(30px, 7vw, 45px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4),
+                        inset 0 0 60px rgba(255, 255, 255, 0.3);
+            border: 5px solid rgba(255, 182, 193, 0.6);
+            animation: cardSlideIn 0.7s ease-out;
+            backdrop-filter: blur(20px);
+        }
+
+        @keyframes cardSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-70px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .header-info p {
+            font-size: clamp(16px, 4.5vw, 22px);
+            color: #666;
+            margin: 12px 0;
+            font-weight: 600;
+        }
+
+        .cards-collected {
+            font-size: clamp(32px, 9vw, 52px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #e91e63, #ec407a, #f06292);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            text-shadow: 3px 3px 6px rgba(233, 30, 99, 0.3);
+            animation: numberPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        /* Cards grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: clamp(20px, 5vw, 35px);
+            margin-bottom: clamp(30px, 7vw, 45px);
+        }
+
+        /* Individual card */
+        .card {
+            background: linear-gradient(145deg, #fff9c4, #fff59d);
+            border: 5px solid #f9a825;
+            border-radius: 28px;
+            padding: clamp(24px, 6vw, 32px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+                        inset 0 0 40px rgba(255, 255, 255, 0.3);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: cardPop 0.7s ease-out both;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.15s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.25s; }
+        .card:nth-child(5) { animation-delay: 0.3s; }
+        .card:nth-child(6) { animation-delay: 0.35s; }
+        .card:nth-child(7) { animation-delay: 0.4s; }
+        .card:nth-child(8) { animation-delay: 0.45s; }
+        .card:nth-child(9) { animation-delay: 0.5s; }
+        .card:nth-child(10) { animation-delay: 0.55s; }
+
+        @keyframes cardPop {
+            from {
+                opacity: 0;
+                transform: scale(0.4) rotate(-15deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: all 0.7s;
+            transform: translateX(-100%);
+        }
+
+        .card:hover::before {
+            transform: translateX(100%) rotate(45deg);
+        }
+
+        .card:hover {
+            transform: translateY(-15px) rotate(2deg) scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .card:active {
+            transform: translateY(-8px) scale(1);
+        }
+
+        /* Locked card */
+        .card.locked {
+            background: linear-gradient(145deg, #e0e0e0, #bdbdbd);
+            border-color: #757575;
+            opacity: 0.75;
+            cursor: not-allowed;
+        }
+
+        .card.locked:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        /* Card content */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: clamp(15px, 4vw, 22px);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            font-size: clamp(55px, 14vw, 80px);
+            animation: iconBounce 2.8s ease-in-out infinite;
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { 
+                transform: translateY(0) scale(1) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-15px) scale(1.15) rotate(5deg); 
+            }
+        }
+
+        .card-info h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(22px, 6vw, 32px);
+            color: #c2185b;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .card-info p {
+            font-size: clamp(14px, 3.8vw, 17px);
+            color: #666;
+            font-weight: 600;
+        }
+
+        .card-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(18px, 4.8vw, 24px);
+            color: #2d3436;
+            line-height: 1.7;
+            margin-top: 18px;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+        }
+
+        .lock-icon {
+            font-size: clamp(55px, 14vw, 70px);
+            text-align: center;
+            margin: 25px 0;
+            animation: lockShake 2s ease-in-out infinite;
+        }
+
+        @keyframes lockShake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, #e91e63, #ec407a, #f06292);
+            color: white;
+            border: none;
+            padding: clamp(18px, 4.5vw, 24px) clamp(45px, 10vw, 65px);
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(17px, 4.5vw, 24px);
+            font-weight: 800;
+            border-radius: 60px;
+            cursor: pointer;
+            margin: clamp(20px, 5vw, 30px) auto;
+            display: block;
+            box-shadow: 0 18px 50px rgba(233, 30, 99, 0.6),
+                        inset 0 -6px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.7s, height 0.7s;
+        }
+
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn:hover {
+            transform: translateY(-8px) scale(1.06);
+            box-shadow: 0 25px 70px rgba(233, 30, 99, 0.8);
+        }
+
+        .btn:active {
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(15px);
+            animation: fadeIn 0.4s ease;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #fff9c4, #fff59d);
+            padding: clamp(35px, 8vw, 55px);
+            border-radius: 35px;
+            text-align: center;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+            animation: modalPop 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 6px solid #f9a825;
+            position: relative;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-25deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shimmer 5s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .modal-header {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 25px;
+        }
+
+        .modal-icon {
+            font-size: clamp(75px, 18vw, 110px);
+            margin-bottom: 20px;
+            animation: modalIconSpin 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
+        }
+
+        @keyframes modalIconSpin {
+            0%, 100% { 
+                transform: rotate(0deg) scale(1); 
+            }
+            50% { 
+                transform: rotate(15deg) scale(1.15); 
+            }
+        }
+
+        .modal-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(32px, 8vw, 48px);
+            color: #c2185b;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .modal-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(20px, 5.5vw, 28px);
+            color: #2d3436;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .close-btn {
+            background: linear-gradient(135deg, #e91e63, #ec407a);
+            color: white;
+            border: none;
+            padding: clamp(16px, 4vw, 22px) clamp(40px, 9vw, 60px);
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(16px, 4.2vw, 22px);
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 25px;
+            box-shadow: 0 15px 45px rgba(233, 30, 99, 0.6);
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .close-btn:hover {
+            transform: translateY(-6px) scale(1.06);
+            box-shadow: 0 20px 60px rgba(233, 30, 99, 0.8);
+        }
+
+        .close-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Empty state */
+        .empty-state {
+            background: rgba(255, 255, 255, 0.98);
+            padding: clamp(40px, 9vw, 60px);
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+            border: 5px solid rgba(255, 182, 193, 0.6);
+            animation: cardSlideIn 0.7s ease-out;
+        }
+
+        .empty-state-icon {
+            font-size: clamp(80px, 20vw, 110px);
+            margin-bottom: 25px;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-20px) rotate(15deg); 
+            }
+        }
+
+        .empty-state h2 {
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(28px, 7.5vw, 42px);
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+
+        .empty-state p {
+            font-size: clamp(16px, 4.5vw, 22px);
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* Responsive grid adjustments */
+        @media (max-width: 600px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .cards-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #e91e63, #ec407a);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #c2185b, #e91e63);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles background -->
+    <div class="particles-bg" id="particlesBg"></div>
+
+    <div class="container">
+        <h1>💌 Mis Cartas de Amor 💌</h1>
+
+        <div class="header-info">
+            <p>Cartas Coleccionadas</p>
+            <div class="cards-collected"><span id="cardCount">0</span> / 10</div>
+            <p style="font-size: clamp(14px, 3.8vw, 18px); color: #999; margin-top: 15px;">
+                ¡Sigue jugando para desbloquear más cartas especiales! ❤️
+            </p>
+        </div>
+
+        <div id="cardsContainer"></div>
+
+        <button class="btn" onclick="window.location.href='game.html'">← Volver al Juego</button>
+    </div>
+
+    <!-- Modal para ver carta completa -->
+    <div id="cardModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon">💝</div>
+                <h2 class="modal-title" id="modalTitle">Carta de Amor</h2>
+            </div>
+            <div class="modal-message" id="modalMessage"></div>
+            <button class="close-btn" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        // ========================================================================
+        // PERSONALIZA TUS CARTAS AQUÍ - Cambia el contenido de cada carta
+        // ========================================================================
+        const loveCards = [
+            {
+                icon: "💖",
+                title: "Primera Elección",
+                message: "Te elijo con los ojos abiertos, sabiendo que amar no siempre es fácil. Te elijo en tus luces y en tus sombras, en tus días de calma y en tus días de caos.\n\nTe elijo no porque te necesite, sino porque contigo la vida se siente más bonita. No busco perfección, busco presencia.\n\nTe escojo en lo simple: en el café compartido, en las risas sin motivo, en los silencios que no incomodan.\n\nTe escojo incluso cuando dudo, incluso cuando la vida se complica, porque el amor real no se trata de sentir siempre lo mismo, sino de elegir quedarse incluso cuando cuesta.\n\nY si la vida me diera mil opciones, igual te escogería a ti, una y otra vez, con todo lo que eso implica."
+            },
+
+            {
+                icon: "👁️",
+                title: "Tu Mirada",
+                message: "¿Por qué me miras tanto? Y no te respondía nada. No porque no supiera qué decir, sino porque en ese instante tus ojos ya eran todas las respuestas.\n\nTal vez estaba enamorado, tal vez sí. Pero, sobre todo, me permitía quedarme ahí, habitando ese momento como quien no quiere irse de un lugar sagrado.\n\nEs irreal encontrarse con los ojos más hermosos que he visto en mi vida. Y más irreal aún cuando eran ellos los que me miraban. Belleza inalcanzable, y aun así, frente a mí.\n\nSi algún día vuelvo a verlos y ellos me reconocen, no pediría nada más. Solo agradecerle a la vida y a Dios por concederme, otra vez, el milagro de verme a través de tus ojos.\n\n¿Y si tus ojos brillan? Brillar es una palabra pequeña. No alcanza, no contiene todo lo que tu mirada significa para mí."
+            },
+            /*
+            {
+                icon: "💝",
+                title: "Regalo del Corazón",
+                message: "El mejor regalo que me ha dado la vida eres tú. Gracias por existir, por estar aquí, por ser mi compañera en este viaje. Eres mi tesoro más preciado, mi joya invaluable. Cada día a tu lado es un regalo del cielo."
+            },
+            {
+                icon: "✨",
+                title: "Estrella Brillante",
+                message: "Iluminas mi vida como las estrellas iluminan la noche. Eres mi guía en la oscuridad, mi luz que nunca se apaga. Contigo, todo brilla más intenso y el mundo es más hermoso. Eres mi constelación favorita."
+            },
+            {
+                icon: "🌙",
+                title: "Luna de Miel",
+                message: "Cada noche pienso en ti bajo la luna. Eres mi sueño hecho realidad, mi luna que nunca se oculta. Te amo hasta la luna y de regreso, infinitas veces. Eres mi cielo estrellado, mi universo completo."
+            },
+            {
+                icon: "💕",
+                title: "Corazones Unidos",
+                message: "Nuestros corazones laten al mismo ritmo, unidos por un amor verdadero e inquebrantable. Eres mi media naranja, mi complemento perfecto. Juntos somos invencibles, juntos podemos con todo. Eres mi alma gemela."
+            },
+            {
+                icon: "🎁",
+                title: "Sorpresa de Amor",
+                message: "Cada día contigo es una sorpresa maravillosa. Nunca dejo de descubrir razones nuevas para amarte más y más. Eres mi regalo eterno, mi bendición del cielo. Gracias por ser tú, tan especial y única."
+            },
+            {
+                icon: "🌺",
+                title: "Flor Exótica",
+                message: "Única, especial, hermosa. Así eres tú para mí. No existe nadie como tú en todo el universo. Eres mi flor exótica, mi amor único e irrepetible. Te amo por ser tú, por tu esencia, por tu alma hermosa."
+            },
+            {
+                icon: "💓",
+                title: "Latidos de Amor",
+                message: "Mi corazón late por ti, cada latido lleva tu nombre grabado. Eres el motor de mi vida, la razón de mi existir. Te amo con cada fibra de mi ser, con todo mi corazón y alma. Eres mi todo, mi razón de vivir."
+            },
+            {
+                icon: "👑",
+                title: "Mi Reina",
+                message: "Eres la reina de mi corazón, mi princesa, mi todo. Me has conquistado completamente con tu amor. Gracias por permitirme ser parte de tu vida. Te amaré por siempre y para siempre, mi amor eterno. Eres mi corona más preciada."
+            }*/
+        ];
+
+        // Get collected cards from localStorage
+        const collectedCards = JSON.parse(localStorage.getItem('collectedCards')) || [];
+        const cardMilestones = [30, 60, 100, 150, 200, 300, 400, 500, 700, 1000];
+
+        // Update card count
+        document.getElementById('cardCount').textContent = collectedCards.length;
+
+        // Render cards
+        function renderCards() {
+            const container = document.getElementById('cardsContainer');
+            
+            if (collectedCards.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">💔</div>
+                        <h2>Aún no tienes cartas</h2>
+                        <p>¡Juega para desbloquear cartas de amor especiales!</p>
+                        <p style="font-size: clamp(14px, 3.8vw, 18px); color: #999;">
+                            La primera carta se desbloquea a los 30 puntos 💖
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Mezclar las cartas desbloqueadas aleatoriamente
+            const unlockedIndices = loveCards
+                .map((card, index) => ({ card, index, milestone: cardMilestones[index] }))
+                .filter(item => collectedCards.includes(item.milestone));
+            
+            // Barajar aleatoriamente
+            for (let i = unlockedIndices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [unlockedIndices[i], unlockedIndices[j]] = [unlockedIndices[j], unlockedIndices[i]];
+            }
+
+            const cardsHTML = loveCards.map((card, index) => {
+                const milestone = cardMilestones[index];
+                const isUnlocked = collectedCards.includes(milestone);
+                
+                if (isUnlocked) {
+                    return `
+                        <div class="card" onclick="openCard(${index})">
+                            <div class="card-header">
+                                <div class="card-icon">${card.icon}</div>
+                                <div class="card-info">
+                                    <h3>${card.title}</h3>
+                                    <p>Desbloqueada: ${milestone} pts</p>
+                                </div>
+                            </div>
+                            <div class="card-message">${card.message.substring(0, 100)}...</div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="card locked">
+                            <div class="lock-icon">🔒</div>
+                            <div class="card-info" style="text-align: center;">
+                                <h3>Carta Bloqueada</h3>
+                                <p>Alcanza ${milestone} puntos para desbloquear</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
+
+            container.innerHTML = `<div class="cards-grid">${cardsHTML}</div>`;
+        }
+
+        // Open card modal
+        function openCard(index) {
+            const card = loveCards[index];
+            document.getElementById('modalIcon').textContent = card.icon;
+            document.getElementById('modalTitle').textContent = card.title;
+            document.getElementById('modalMessage').textContent = card.message;
+            document.getElementById('cardModal').style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('cardModal').style.display = 'none';
+        }
+
+        // Initialize
+        renderCards();
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Create background particles
+        function createBackgroundParticles() {
+            const container = document.getElementById('particlesBg');
+            const particles = ['💕', '💖', '💗', '💓', '💝', '❤️', '🌸', '✨', '🌟', '⭐'];
+            const count = window.innerWidth < 768 ? 20 : 35;
+            
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle-bg';
+                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.fontSize = (Math.random() * 25 + 18) + 'px';
+                particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createBackgroundParticles();
+
+        // Prevent accidental zoom on mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
