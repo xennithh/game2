@@ -162,7 +162,7 @@
             text-align: center;
             margin-bottom: 22px;
             text-shadow: 4px 4px 0 #ffc1e3, 
-                         8px 8px 30px rgba(233, 30, 99, 0.6);
+                        8px 8px 30px rgba(233, 30, 99, 0.6);
             letter-spacing: 3px;
             animation: titleGlow 3s ease-in-out infinite;
         }
@@ -618,7 +618,7 @@
     <!-- Game over screen -->
     <div class="overlay-screen" id="gameOverScreen">
         <div class="overlay-content">
-            <div class="sad-emoji">🥺</div>
+            <div class="sad-emoji">🌼</div>
             <h2>¡Ups!</h2>
             <p>Te quedaste sin vidas</p>
             <p style="font-size: clamp(26px, 7vw, 38px); font-weight: 900; color: #e91e63; margin: 25px 0;" id="finalScore">0 Puntos</p>
@@ -686,16 +686,16 @@
         let heartSpawnInterval = 60; // MÁS LENTO - antes era 40
         
         // Card milestones - cartas se desbloquean en estos puntos
-        const cardMilestones = [30, 60, 100, 150, 200, 300, 400, 500, 700, 1000];
+        const cardMilestones = [100, 200, 300, 450, 600, 800, 950, 1100, 1400, 1700, 2000, 2500, 2700, 3000, 3500];
         let collectedCards = JSON.parse(localStorage.getItem('collectedCards')) || [];
         
         // Romantic phrases
         const phrases = [
-            "Uy 💕", "Diohh miohh 😍", "Que lindo ✨", "Uff 🔥", 
+            "Uy 💕", "Diohh miohh 😍", "Que lindo ✨", "Uff ", 
             "xD <3 te quiero", "Niña 💖", "Preciosa 🌹", "Ñeñeñe 😊",
-            "Tedible 💝", "Nouuu 🥺", "Que abuso 😂", "Eres mi sol ☀️",
-            "Para ti mi amor 💕", "Mi razón 💓", "Te amo 💗", "Bebé 👶",
-            "Mi cielo 🌟", "Amor mío 💘", "Hermosa 🌺", "Mi vida 🦋"
+            "Tedible 💝", "Nouuu ", "Que abuso ", "Eres mi sol ",
+            "Para ti mi niña 💕", "Mi razón 💓", "Te adoro 💗", "wiiii",
+            "Mi cielo 🌟", "te admiro ", "Hermosa 🌺", "Mi vida 🦋"
         ];
         
         // Controls
@@ -920,7 +920,7 @@
         }
         
         function updateLives() {
-            const livesSymbols = '🥺'.repeat(Math.max(0, lives));
+            const livesSymbols = '🌼'.repeat(Math.max(0, lives));
             document.getElementById('lives').textContent = livesSymbols || '💔';
         }
         

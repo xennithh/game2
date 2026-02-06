@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>💌 Mis Cartas de Amor 💌</title>
+    <title>💌 tus Cartas de mucho cariño hacia ti 💌</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;900&family=Dancing+Script:wght@700&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
         * {
@@ -565,7 +565,7 @@
     <div class="particles-bg" id="particlesBg"></div>
 
     <div class="container">
-        <h1>💌 Mis Cartas de Amor 💌</h1>
+        <h1>💌 Tus Cartas de Amor 💌</h1>
 
         <div class="header-info">
             <p>Cartas Coleccionadas</p>
@@ -585,7 +585,7 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <div class="modal-icon" id="modalIcon">💝</div>
-                <h2 class="modal-title" id="modalTitle">Carta de Amor</h2>
+                <h2 class="modal-title" id="modalTitle">Carta De todo Corazon</h2>
             </div>
             <div class="modal-message" id="modalMessage"></div>
             <button class="close-btn" onclick="closeModal()">Cerrar</button>
@@ -696,7 +696,8 @@
 
         // Get collected cards from localStorage
         const collectedCards = JSON.parse(localStorage.getItem('collectedCards')) || [];
-        const cardMilestones = [30, 60, 100, 150, 200, 300, 400, 500, 700, 1000];
+        const cardMilestones = [100, 200, 300, 450, 600, 800, 950, 1100, 1400, 1700];
+        
 
         // Update card count
         document.getElementById('cardCount').textContent = collectedCards.length;
@@ -710,9 +711,9 @@
                     <div class="empty-state">
                         <div class="empty-state-icon">💔</div>
                         <h2>Aún no tienes cartas</h2>
-                        <p>¡Juega para desbloquear cartas de amor especiales!</p>
+                        <p>¡Juega para desbloquear cartas especiales!</p>
                         <p style="font-size: clamp(14px, 3.8vw, 18px); color: #999;">
-                            La primera carta se desbloquea a los 30 puntos 💖
+                            La primera carta se desbloquea a los 30 puntos 100
                         </p>
                     </div>
                 `;
