@@ -1,9 +1,11 @@
-[file content begin]
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#e91e63">
     <title>💖 Dispara Corazones - Juego 💖</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;900&family=Dancing+Script:wght@700&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
@@ -12,6 +14,13 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
         body {
@@ -23,9 +32,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
-            overflow: hidden;
-            position: relative;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            height: 100%;
         }
 
         @keyframes gradientFlow {
@@ -48,7 +58,7 @@
 
         .particle {
             position: absolute;
-            font-size: 22px;
+            font-size: 18px;
             opacity: 0;
             animation: floatParticle linear infinite;
         }
@@ -74,23 +84,24 @@
         /* Main game container */
         .game-container {
             background: rgba(255, 255, 255, 0.98);
-            border-radius: 35px;
-            padding: clamp(20px, 5vw, 35px);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), 
-                        inset 0 0 60px rgba(255, 255, 255, 0.4);
-            max-width: 900px;
+            border-radius: 25px;
+            padding: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
+                        inset 0 0 40px rgba(255, 255, 255, 0.3);
             width: 100%;
+            max-width: 390px;
             position: relative;
             z-index: 10;
-            backdrop-filter: blur(25px);
-            animation: slideIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 5px solid rgba(255, 182, 193, 0.6);
+            backdrop-filter: blur(15px);
+            animation: slideIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 4px solid rgba(255, 182, 193, 0.6);
+            margin: 0 auto;
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(100px) scale(0.85);
+                transform: translateY(80px) scale(0.9);
             }
             to {
                 opacity: 1;
@@ -103,42 +114,41 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: clamp(12px, 4vw, 18px);
-            margin-bottom: 22px;
+            gap: 12px;
+            margin-bottom: 15px;
             animation: headerFloat 4s ease-in-out infinite;
         }
 
         @keyframes headerFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-8px); }
         }
 
         .cat-emoji {
-            font-size: clamp(50px, 12vw, 80px);
+            font-size: 45px;
             animation: catWiggle 2.5s ease-in-out infinite;
-            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
-            cursor: pointer;
+            filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.3));
             transition: all 0.3s ease;
         }
 
-        .cat-emoji:hover {
+        .cat-emoji:active {
             transform: scale(1.2) rotate(15deg);
         }
 
         @keyframes catWiggle {
-            0%, 100% { transform: rotate(-12deg); }
-            50% { transform: rotate(12deg); }
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
         }
 
         .hearts-group {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .heart-emoji {
-            font-size: clamp(32px, 8vw, 55px);
+            font-size: 32px;
             animation: heartBeat 1.5s ease-in-out infinite;
-            filter: drop-shadow(0 5px 15px rgba(255, 0, 100, 0.6));
+            filter: drop-shadow(0 4px 12px rgba(255, 0, 100, 0.5));
         }
 
         .heart-emoji:nth-child(2) {
@@ -150,44 +160,44 @@
                 transform: scale(1);
             }
             50% { 
-                transform: scale(1.4);
+                transform: scale(1.3);
             }
         }
 
         /* Title */
         h1 {
             font-family: 'Fredoka One', cursive;
-            font-size: clamp(34px, 8vw, 56px);
+            font-size: 26px;
             color: #e91e63;
             text-align: center;
-            margin-bottom: 22px;
-            text-shadow: 4px 4px 0 #ffc1e3, 
-                        8px 8px 30px rgba(233, 30, 99, 0.6);
-            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0 #ffc1e3, 
+                        5px 5px 20px rgba(233, 30, 99, 0.5);
+            letter-spacing: 2px;
             animation: titleGlow 3s ease-in-out infinite;
         }
 
         @keyframes titleGlow {
             0%, 100% { 
-                text-shadow: 4px 4px 0 #ffc1e3, 8px 8px 30px rgba(233, 30, 99, 0.6);
+                text-shadow: 3px 3px 0 #ffc1e3, 5px 5px 20px rgba(233, 30, 99, 0.5);
                 transform: scale(1);
             }
             50% { 
-                text-shadow: 4px 4px 0 #ffc1e3, 8px 8px 55px rgba(233, 30, 99, 1);
-                transform: scale(1.03);
+                text-shadow: 3px 3px 0 #ffc1e3, 5px 5px 35px rgba(233, 30, 99, 0.8);
+                transform: scale(1.02);
             }
         }
 
         /* Dedication card */
         .dedication-card {
             background: linear-gradient(135deg, #fff 0%, #fce4ec 100%);
-            border: 3px solid #f8bbd9;
-            border-radius: 22px;
-            padding: clamp(18px, 4vw, 24px);
-            margin: 22px auto;
+            border: 2px solid #f8bbd9;
+            border-radius: 18px;
+            padding: 15px;
+            margin: 15px auto;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.3);
-            max-width: 550px;
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.2);
+            max-width: 100%;
             position: relative;
             overflow: hidden;
         }
@@ -210,9 +220,9 @@
 
         .dedication-title {
             font-family: 'Dancing Script', cursive;
-            font-size: clamp(26px, 6vw, 36px);
+            font-size: 20px;
             color: #c2185b;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
             font-weight: 700;
@@ -220,7 +230,7 @@
 
         .dedication-text {
             font-family: 'Dancing Script', cursive;
-            font-size: clamp(20px, 5vw, 28px);
+            font-size: 17px;
             color: #d81b60;
             position: relative;
             z-index: 1;
@@ -230,102 +240,99 @@
         /* Stats bar */
         .stats-bar {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: clamp(12px, 3vw, 18px);
-            margin: 25px 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
         }
 
         .stat-box {
             background: linear-gradient(135deg, #fff 0%, #e1f5fe 100%);
-            border: 3px solid #81d4fa;
-            border-radius: 20px;
-            padding: clamp(12px, 3vw, 18px);
+            border: 2px solid #81d4fa;
+            border-radius: 15px;
+            padding: 12px 8px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(1, 87, 155, 0.25);
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 8px 20px rgba(1, 87, 155, 0.2);
+            transition: all 0.3s ease;
         }
 
-        .stat-box:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 45px rgba(1, 87, 155, 0.4);
+        .stat-box:active {
+            transform: translateY(-4px) scale(1.05);
         }
 
         .stat-label {
-            font-size: clamp(13px, 3.5vw, 16px);
+            font-size: 11px;
             font-weight: 700;
             color: #01579b;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .stat-value {
-            font-size: clamp(22px, 6vw, 36px);
+            font-size: 22px;
             font-weight: 900;
             color: #e91e63;
-            text-shadow: 2px 2px 0 #ffc1e3;
+            text-shadow: 1px 1px 0 #ffc1e3;
         }
 
         /* Canvas container */
         .canvas-container {
             position: relative;
-            margin: 25px auto;
-            max-width: 100%;
-            border-radius: 25px;
+            margin: 15px 0;
+            width: 100%;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
-                        inset 0 0 40px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
+                        inset 0 0 25px rgba(255, 255, 255, 0.2);
             background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            aspect-ratio: 1/0.9;
         }
 
         canvas {
             display: block;
             width: 100%;
-            height: auto;
+            height: 100%;
             touch-action: none;
         }
 
         /* Buttons */
         .button-group {
             display: flex;
-            gap: clamp(10px, 3vw, 15px);
+            flex-direction: column;
+            gap: 12px;
             justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .btn {
             background: linear-gradient(135deg, #e91e63, #ec407a);
             color: white;
             border: none;
-            padding: clamp(14px, 3.5vw, 18px) clamp(30px, 7vw, 45px);
+            padding: 16px 20px;
             font-family: 'Poppins', sans-serif;
-            font-size: clamp(15px, 4vw, 19px);
+            font-size: 16px;
             font-weight: 800;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 12px 35px rgba(233, 30, 99, 0.5);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.4);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             position: relative;
             z-index: 1;
-        }
-
-        .btn:hover {
-            transform: translateY(-6px) scale(1.06);
-            box-shadow: 0 18px 50px rgba(233, 30, 99, 0.7);
+            width: 100%;
         }
 
         .btn:active {
-            transform: translateY(-2px) scale(1.02);
+            transform: translateY(-3px) scale(0.98);
+            box-shadow: 0 12px 30px rgba(233, 30, 99, 0.6);
         }
 
         /* Floating phrases */
         .floating-phrase {
             position: absolute;
             font-family: 'Dancing Script', cursive;
-            font-size: clamp(18px, 5vw, 26px);
+            font-size: 18px;
             font-weight: 700;
             color: #e91e63;
             text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
@@ -341,8 +348,45 @@
             }
             100% {
                 opacity: 0;
-                transform: translateY(-120px) scale(1.5);
+                transform: translateY(-100px) scale(1.3);
             }
+        }
+
+        /* Mobile controls */
+        .mobile-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .mobile-btn {
+            background: linear-gradient(135deg, #81d4fa, #4fc3f7);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: none;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(79, 195, 247, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-btn:active {
+            transform: scale(0.85);
+            box-shadow: 0 4px 12px rgba(79, 195, 247, 0.6);
+        }
+
+        #btnShoot {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e91e63, #ec407a);
+            font-size: 32px;
         }
 
         /* Overlay screens */
@@ -357,8 +401,9 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(15px);
-            animation: fadeIn 0.4s ease;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+            padding: 20px;
         }
 
         @keyframes fadeIn {
@@ -368,20 +413,20 @@
 
         .overlay-content {
             background: linear-gradient(135deg, #fff 0%, #fce4ec 100%);
-            padding: clamp(35px, 8vw, 50px);
-            border-radius: 35px;
+            padding: 25px 20px;
+            border-radius: 25px;
             text-align: center;
-            max-width: 90%;
-            width: 500px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
-            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 5px solid rgba(255, 182, 193, 0.8);
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 4px solid rgba(255, 182, 193, 0.8);
         }
 
         @keyframes popIn {
             0% {
                 opacity: 0;
-                transform: scale(0.3) rotate(-20deg);
+                transform: scale(0.4) rotate(-15deg);
             }
             100% {
                 opacity: 1;
@@ -391,29 +436,29 @@
 
         .overlay-content h2 {
             font-family: 'Fredoka One', cursive;
-            font-size: clamp(32px, 8vw, 48px);
+            font-size: 26px;
             color: #e91e63;
-            margin-bottom: 22px;
-            text-shadow: 3px 3px 0 #ffc1e3;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 #ffc1e3;
         }
 
         .overlay-content p {
-            font-size: clamp(16px, 4.5vw, 22px);
+            font-size: 16px;
             color: #666;
-            margin: 15px 0;
+            margin: 10px 0;
             font-weight: 600;
         }
 
         /* Reward screen specific */
         .reward-icon {
-            font-size: clamp(80px, 20vw, 120px);
-            margin: 25px 0;
+            font-size: 70px;
+            margin: 20px 0;
             animation: rewardBounce 1s ease-in-out infinite;
         }
 
         @keyframes rewardBounce {
             0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.2) rotate(10deg); }
+            50% { transform: scale(1.15) rotate(8deg); }
         }
 
         .reward-title {
@@ -421,19 +466,19 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: clamp(28px, 7vw, 42px);
+            font-size: 22px;
             font-weight: 900;
-            margin: 20px 0;
-            text-shadow: 3px 3px 6px rgba(255, 215, 0, 0.4);
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
         }
 
         /* Countdown screen */
         .countdown-number {
             font-family: 'Fredoka One', cursive;
-            font-size: clamp(100px, 25vw, 180px);
+            font-size: 120px;
             color: #e91e63;
-            text-shadow: 5px 5px 0 #ffc1e3,
-                         10px 10px 40px rgba(233, 30, 99, 0.8);
+            text-shadow: 4px 4px 0 #ffc1e3,
+                         8px 8px 30px rgba(233, 30, 99, 0.7);
             animation: countdownPulse 1s ease-in-out;
         }
 
@@ -450,94 +495,182 @@
 
         /* Game over screen */
         .sad-emoji {
-            font-size: clamp(70px, 18vw, 100px);
-            margin: 20px 0;
+            font-size: 70px;
+            margin: 15px 0;
             animation: sadShake 2s ease-in-out infinite;
         }
 
         @keyframes sadShake {
             0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-10deg); }
-            75% { transform: rotate(10deg); }
+            25% { transform: rotate(-8deg); }
+            75% { transform: rotate(8deg); }
         }
 
         .record-badge {
             background: linear-gradient(135deg, #ffd700, #ffed4e);
             color: #c2185b;
-            padding: 12px 30px;
-            border-radius: 50px;
+            padding: 10px 20px;
+            border-radius: 40px;
             font-weight: 900;
-            font-size: clamp(16px, 4.5vw, 22px);
+            font-size: 16px;
             display: inline-block;
-            margin: 18px 0;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+            margin: 15px 0;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
             animation: badgeShine 2s ease-in-out infinite;
         }
 
         @keyframes badgeShine {
             0%, 100% { 
-                box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+                box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
             }
             50% { 
-                box-shadow: 0 15px 45px rgba(255, 215, 0, 0.9);
+                box-shadow: 0 12px 30px rgba(255, 215, 0, 0.8);
             }
         }
 
-        /* Mobile controls */
-        .mobile-controls {
-            display: none;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+        /* Responsive adjustments */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .game-container {
+                max-width: 450px;
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .cat-emoji {
+                font-size: 55px;
+            }
+            
+            .heart-emoji {
+                font-size: 40px;
+            }
+            
+            .mobile-btn {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+            
+            #btnShoot {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .button-group {
+                flex-direction: row;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: auto;
+                padding: 16px 30px;
+            }
         }
 
-        .mobile-btn {
-            background: linear-gradient(135deg, #81d4fa, #4fc3f7);
-            width: clamp(70px, 18vw, 90px);
-            height: clamp(70px, 18vw, 90px);
-            border-radius: 50%;
-            border: none;
-            font-size: clamp(28px, 8vw, 40px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            touch-action: manipulation;
-        }
-
-        .mobile-btn:active {
-            transform: scale(0.9);
-            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.7);
-        }
-
-        @media (max-width: 768px) {
+        @media (min-width: 769px) {
+            .game-container {
+                max-width: 500px;
+                padding: 25px;
+            }
+            
             .mobile-controls {
-                display: flex;
+                display: none;
+            }
+            
+            .button-group {
+                flex-direction: row;
+                gap: 20px;
+            }
+            
+            .btn {
+                width: auto;
+                padding: 18px 35px;
+                font-size: 18px;
             }
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
+        /* iPhone 13 specific */
+        @media only screen 
+            and (device-width: 390px) 
+            and (device-height: 844px) 
+            and (-webkit-device-pixel-ratio: 3) {
+            
             .game-container {
-                padding: 18px;
-                border-radius: 25px;
+                max-width: 370px;
+                padding: 20px 15px;
             }
+            
+            h1 {
+                font-size: 30px;
+                margin-bottom: 15px;
+            }
+            
+            .dedication-card {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .dedication-title {
+                font-size: 22px;
+            }
+            
+            .dedication-text {
+                font-size: 18px;
+            }
+            
+            .stat-box {
+                padding: 12px;
+                margin: 8px 0;
+            }
+            
+            .stat-label {
+                font-size: 13px;
+            }
+            
+            .stat-value {
+                font-size: 26px;
+            }
+            
+            #lives {
+                font-size: 28px;
+                letter-spacing: 4px;
+            }
+            
+            .btn {
+                padding: 16px;
+                font-size: 18px;
+                margin: 8px 0;
+            }
+            
+            .mobile-btn {
+                width: 70px;
+                height: 70px;
+                font-size: 28px;
+            }
+            
+            #btnShoot {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+            
+            .canvas-container {
+                aspect-ratio: 16/9;
+            }
+}
 
-            .stats-bar {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .game-container {
-                max-width: 950px;
-            }
+        /* Prevent text selection */
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     </style>
 </head>
-<body>
+<body class="no-select">
     <!-- Floating particles -->
     <div class="particles" id="particles"></div>
 
@@ -585,7 +718,7 @@
         <!-- Mobile controls -->
         <div class="mobile-controls">
             <div class="mobile-btn" id="btnLeft">⬅️</div>
-            <div class="mobile-btn" id="btnShoot" style="width: clamp(90px, 22vw, 110px); height: clamp(90px, 22vw, 110px);">💋</div>
+            <div class="mobile-btn" id="btnShoot">💋</div>
             <div class="mobile-btn" id="btnRight">➡️</div>
         </div>
 
@@ -603,14 +736,14 @@
             <div class="reward-icon">💌</div>
             <p class="reward-title">¡Has desbloqueado una carta especial!</p>
             <p>Una nueva carta con un contenido especial te espera en tu colección.</p>
-            <button class="btn" onclick="closeReward()" style="margin-top: 30px;">Recoger y Continuar</button>
+            <button class="btn" onclick="closeReward()" style="margin-top: 20px;">Recoger y Continuar</button>
         </div>
     </div>
 
     <!-- Countdown screen -->
     <div class="overlay-screen" id="countdownScreen">
         <div class="overlay-content">
-            <p style="font-size: clamp(20px, 5vw, 28px); margin-bottom: 30px; font-weight: 700; color: #e91e63;">¡Prepárate!</p>
+            <p style="font-size: 18px; margin-bottom: 20px; font-weight: 700; color: #e91e63;">¡Prepárate!</p>
             <div class="countdown-number" id="countdownNumber">3</div>
         </div>
     </div>
@@ -621,10 +754,10 @@
             <div class="sad-emoji">🌼</div>
             <h2>¡Ups!</h2>
             <p>Te quedaste sin vidas</p>
-            <p style="font-size: clamp(26px, 7vw, 38px); font-weight: 900; color: #e91e63; margin: 25px 0;" id="finalScore">0 Puntos</p>
+            <p style="font-size: 24px; font-weight: 900; color: #e91e63; margin: 20px 0;" id="finalScore">0 Puntos</p>
             <div class="record-badge" id="recordMsg" style="display: none;">🏆 ¡Nuevo Récord! 🏆</div>
-            <button class="btn" onclick="restartGame()" style="margin-top: 25px;">🔄 Jugar de Nuevo</button>
-            <button class="btn" onclick="viewCards()" style="margin-top: 15px; background: linear-gradient(135deg, #81d4fa, #4fc3f7);">💌 Ver Mis Cartas</button>
+            <button class="btn" onclick="restartGame()" style="margin-top: 20px;">🔄 Jugar de Nuevo</button>
+            <button class="btn" onclick="viewCards()" style="margin-top: 12px; background: linear-gradient(135deg, #81d4fa, #4fc3f7);">💌 Ver Mis Cartas</button>
         </div>
     </div>
 
@@ -636,16 +769,19 @@
         // Responsive canvas size
         function resizeCanvas() {
             const container = canvas.parentElement;
-            const maxWidth = 800;
-            const maxHeight = 600;
-            const containerWidth = container.clientWidth;
+            const isMobile = window.innerWidth < 768;
             
-            if (window.innerWidth < 768) {
+            if (isMobile) {
+                // Mobile optimized size
+                const containerWidth = container.clientWidth;
                 canvas.width = containerWidth;
-                canvas.height = containerWidth * 1.2; // Más alto en móvil
+                canvas.height = containerWidth * 0.9; // 9:10 aspect ratio
             } else {
+                // Desktop size
+                const maxWidth = 500;
+                const containerWidth = container.clientWidth;
                 canvas.width = Math.min(maxWidth, containerWidth);
-                canvas.height = maxHeight;
+                canvas.height = 400;
             }
         }
         
@@ -662,9 +798,9 @@
         // Player (cat)
         const player = {
             x: canvas.width / 2,
-            y: canvas.height - 80,
-            width: 60, // Tamaño aumentado para mejor visibilidad
-            height: 60,
+            y: canvas.height - 60,
+            width: window.innerWidth < 768 ? 45 : 55,
+            height: window.innerWidth < 768 ? 45 : 55,
             speed: 6,
             shooting: false,
             // Cargar las imágenes del gato
@@ -683,7 +819,7 @@
         let bullets = [];
         let hearts = [];
         let heartSpawnTimer = 0;
-        let heartSpawnInterval = 60; // MÁS LENTO - antes era 40
+        let heartSpawnInterval = 70; // Más lento para móvil
         
         // Card milestones - cartas se desbloquean en estos puntos
         const cardMilestones = [100, 200, 300, 450, 600, 800, 950, 1100, 1400, 1700, 2000, 2500, 2700, 3000, 3500];
@@ -701,50 +837,78 @@
         // Controls
         let moveLeft = false;
         let moveRight = false;
+        let isMobile = window.innerWidth < 768;
         
-        // Keyboard controls
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = true;
-            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = true;
-            if (e.key === ' ') {
-                e.preventDefault();
-                shoot();
-            }
-        });
-        
-        document.addEventListener('keyup', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = false;
-            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = false;
-        });
+        // Keyboard controls (desktop)
+        if (!isMobile) {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = true;
+                if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = true;
+                if (e.key === ' ') {
+                    e.preventDefault();
+                    shoot();
+                }
+            });
+            
+            document.addEventListener('keyup', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveLeft = false;
+                if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveRight = false;
+            });
+        }
         
         // Mobile controls
         const btnLeft = document.getElementById('btnLeft');
         const btnRight = document.getElementById('btnRight');
         const btnShoot = document.getElementById('btnShoot');
         
+        // Touch events for mobile
         btnLeft.addEventListener('touchstart', (e) => {
             e.preventDefault();
             moveLeft = true;
         });
-        btnLeft.addEventListener('touchend', () => moveLeft = false);
+        
+        btnLeft.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            moveLeft = false;
+        });
         
         btnRight.addEventListener('touchstart', (e) => {
             e.preventDefault();
             moveRight = true;
         });
-        btnRight.addEventListener('touchend', () => moveRight = false);
+        
+        btnRight.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            moveRight = false;
+        });
         
         btnShoot.addEventListener('touchstart', (e) => {
             e.preventDefault();
             shoot();
         });
         
-        // Also mouse controls for mobile
+        // Mouse events for mobile buttons (for devices that support both)
         btnLeft.addEventListener('mousedown', () => moveLeft = true);
         btnLeft.addEventListener('mouseup', () => moveLeft = false);
+        btnLeft.addEventListener('mouseleave', () => moveLeft = false);
+        
         btnRight.addEventListener('mousedown', () => moveRight = true);
         btnRight.addEventListener('mouseup', () => moveRight = false);
-        btnShoot.addEventListener('click', shoot);
+        btnRight.addEventListener('mouseleave', () => moveRight = false);
+        
+        btnShoot.addEventListener('click', (e) => {
+            e.preventDefault();
+            shoot();
+        });
+        
+        // Prevent default touch behavior
+        document.addEventListener('touchmove', (e) => {
+            if (e.target.classList.contains('mobile-btn') || 
+                e.target.classList.contains('btn') ||
+                e.target.id === 'gameCanvas') {
+                e.preventDefault();
+            }
+        }, { passive: false });
         
         // Draw cat with animation usando imágenes
         function drawCat() {
@@ -764,9 +928,9 @@
             }
             
             // Añadir sombra para efecto 3D
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-            ctx.shadowBlur = 10;
-            ctx.shadowOffsetY = 5;
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetY = 4;
             
             ctx.restore();
         }
@@ -777,7 +941,7 @@
                 bullets.push({
                     x: player.x,
                     y: player.y - 10,
-                    speed: 10 // Velocidad de bala
+                    speed: isMobile ? 12 : 10
                 });
                 player.shooting = true;
                 
@@ -797,14 +961,16 @@
             }
         }
         
-        // Spawn hearts - MÁS LENTO
+        // Spawn hearts - optimizado para móvil
         function spawnHeart() {
-            const size = Math.random() * 15 + 30; // Corazones un poco más grandes
+            const size = isMobile ? Math.random() * 12 + 25 : Math.random() * 15 + 30;
+            const speed = isMobile ? Math.random() * 0.4 + 0.5 : Math.random() * 0.5 + 0.6;
+            
             hearts.push({
                 x: Math.random() * (canvas.width - size),
                 y: -size,
                 size: size,
-                speed: Math.random() * 0.5   + 0.6, // MUCHO MÁS LENTO - antes era 0.8 + 0.9
+                speed: speed,
                 rotation: Math.random() * 360,
                 rotationSpeed: (Math.random() - 0.5) * 2
             });
@@ -886,8 +1052,9 @@
             // Draw bullets (kisses)
             bullets.forEach(bullet => {
                 ctx.save();
-                ctx.font = '28px Arial';
+                ctx.font = '24px Arial';
                 ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
                 ctx.fillText('💋', bullet.x, bullet.y);
                 ctx.restore();
             });
@@ -895,7 +1062,7 @@
             // Draw hearts
             hearts.forEach(heart => {
                 ctx.save();
-                ctx.translate(heart.x, heart.y);
+                ctx.translate(heart.x + heart.size/2, heart.y + heart.size/2);
                 ctx.rotate(heart.rotation * Math.PI / 180);
                 ctx.font = heart.size + 'px Arial';
                 ctx.textAlign = 'center';
@@ -1006,14 +1173,14 @@
         // Start game
         function startGame() {
             resetGame();
-            startCountdown(); // Ahora empieza con cuenta regresiva
+            startCountdown();
         }
         
         // Restart game
         function restartGame() {
             document.getElementById('gameOverScreen').style.display = 'none';
             resetGame();
-            startCountdown(); // Cuenta regresiva antes de empezar
+            startCountdown();
         }
         
         // Reset game
@@ -1040,22 +1207,92 @@
         function createParticles() {
             const container = document.getElementById('particles');
             const particles = ['💕', '💖', '💗', '💓', '💝', '✨', '⭐', '🌟'];
-            const count = window.innerWidth < 768 ? 15 : 25;
+            const count = isMobile ? 15 : 25;
             
             for (let i = 0; i < count; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.textContent = particles[Math.floor(Math.random() * particles.length)];
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
-                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.fontSize = (Math.random() * 15 + 12) + 'px';
+                particle.style.animationDuration = (Math.random() * 12 + 12) + 's';
+                particle.style.animationDelay = Math.random() * 8 + 's';
                 container.appendChild(particle);
             }
         }
         
+        // Initialize
         createParticles();
+        
+        // Prevent zoom on double tap
+        let lastTap = 0;
+        document.addEventListener('touchend', (e) => {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            if (tapLength < 500 && tapLength > 0) {
+                e.preventDefault();
+            }
+            lastTap = currentTime;
+        }, false);
+        
+        // Prevent context menu on mobile
+        document.addEventListener('contextmenu', (e) => {
+            if (isMobile) {
+                e.preventDefault();
+            }
+        });
+
+        // ============================================
+// MEJORAS ESPECÍFICAS PARA MÓVIL
+// ============================================
+
+// Ajustar canvas al cargar en móvil
+function adjustCanvasForMobile() {
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+        resizeCanvas();
+        
+        // Ajustar posición del jugador
+        player.y = canvas.height - 50;
+        player.width = 45;
+        player.height = 45;
+        
+        // Reducir velocidad de corazones en móvil
+        heartSpawnInterval = 80;
+    }
+}
+
+// Ejecutar al cargar y al cambiar tamaño
+window.addEventListener('load', adjustCanvasForMobile);
+window.addEventListener('resize', adjustCanvasForMobile);
+
+// Prevenir zoom en canvas (móvil)
+canvas.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+canvas.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Mejorar controles táctiles
+document.querySelectorAll('.mobile-btn').forEach(btn => {
+    btn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        btn.style.transform = 'scale(0.9)';
+        btn.style.opacity = '0.8';
+    });
+    
+    btn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        btn.style.transform = 'scale(1)';
+        btn.style.opacity = '1';
+    });
+});
     </script>
 </body>
 </html>
-[file content end]

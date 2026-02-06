@@ -420,6 +420,319 @@
                 transform: scale(0) rotate(360deg) translateY(-60px);
             }
         }
+        /* ============================================
+   MEJORAS ESPECÍFICAS PARA MÓVIL - Diseño limpio
+   ============================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 100vh !important;
+    }
+    
+    .game-container {
+        width: 100% !important;
+        max-width: 380px !important;
+        margin: 0 auto !important;
+        padding: 20px !important;
+        border-radius: 25px !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    /* Header mejorado */
+    .game-header {
+        margin-bottom: 15px !important;
+    }
+    
+    .cat-emoji {
+        font-size: 40px !important;
+    }
+    
+    .heart-emoji {
+        font-size: 28px !important;
+    }
+    
+    /* Título principal */
+    h1 {
+        font-size: 28px !important;
+        margin-bottom: 15px !important;
+        text-shadow: 2px 2px 0 #ffc1e3 !important;
+    }
+    
+    /* Tarjeta de dedicación */
+    .dedication-card {
+        margin: 15px 0 !important;
+        padding: 15px !important;
+        border-radius: 15px !important;
+    }
+    
+    .dedication-title {
+        font-size: 20px !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .dedication-text {
+        font-size: 16px !important;
+    }
+    
+    /* Estadísticas - Diseño limpio como en la imagen */
+    .stats-bar {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        margin: 20px 0 !important;
+        padding: 0 !important;
+    }
+    
+    .stat-box {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 2px solid #f8bbd9 !important;
+        border-radius: 15px !important;
+        padding: 12px 15px !important;
+        box-shadow: 0 5px 15px rgba(233, 30, 99, 0.1) !important;
+        position: relative !important;
+    }
+    
+    .stat-label {
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        color: #e91e63 !important;
+        margin-bottom: 8px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+    }
+    
+    .stat-value {
+        font-size: 24px !important;
+        font-weight: 900 !important;
+        color: #c2185b !important;
+        text-shadow: none !important;
+    }
+    
+    /* VIDAS con emojis de 🎉 */
+    #lives {
+        font-size: 30px !important;
+        letter-spacing: 5px !important;
+        text-align: center !important;
+    }
+    
+    /* Canvas container */
+    .canvas-container {
+        margin: 20px 0 !important;
+        border-radius: 15px !important;
+        border: 3px solid #ffcdd2 !important;
+        aspect-ratio: 16/9 !important;
+    }
+    
+    /* Controles móviles */
+    .mobile-controls {
+        margin-top: 25px !important;
+        gap: 15px !important;
+        justify-content: center !important;
+    }
+    
+    .mobile-btn {
+        width: 70px !important;
+        height: 70px !important;
+        border-radius: 15px !important;
+        font-size: 28px !important;
+    }
+    
+    #btnShoot {
+        width: 80px !important;
+        height: 80px !important;
+        font-size: 32px !important;
+    }
+    
+    /* Grupo de botones - Diseño limpio */
+    .button-group {
+        margin-top: 25px !important;
+        gap: 15px !important;
+    }
+    
+    .btn {
+        width: 100% !important;
+        padding: 16px !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        border-radius: 12px !important;
+        margin: 5px 0 !important;
+        text-align: center !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+    }
+    
+    /* Botón EMPEZAR con ❤️ a la izquierda */
+    .btn:first-child::before {
+        content: "❤️" !important;
+        font-size: 20px !important;
+    }
+    
+    /* Botón VER CARTAS con 💌 a la izquierda */
+    .btn:last-child::before {
+        content: "💌" !important;
+        font-size: 20px !important;
+    }
+    
+    /* Eliminar cualquier after que exista */
+    .btn::after {
+        content: "" !important;
+    }
+    
+    /* Overlays para móvil */
+    .overlay-content {
+        max-width: 320px !important;
+        padding: 25px 20px !important;
+        margin: 0 15px !important;
+    }
+    
+    .overlay-content h2 {
+        font-size: 24px !important;
+    }
+    
+    .overlay-content p {
+        font-size: 16px !important;
+    }
+}
+
+/* ============================================
+   ESPECÍFICO PARA IPHONE 13 (390x844)
+   ============================================ */
+@media only screen 
+    and (device-width: 390px) 
+    and (device-height: 844px) 
+    and (-webkit-device-pixel-ratio: 3) {
+    
+    .game-container {
+        max-width: 360px !important;
+        padding: 18px !important;
+        margin-top: 10px !important;
+    }
+    
+    .stats-bar {
+        gap: 10px !important;
+    }
+    
+    .stat-box {
+        padding: 10px 12px !important;
+    }
+    
+    .stat-value {
+        font-size: 22px !important;
+    }
+    
+    #lives {
+        font-size: 28px !important;
+        letter-spacing: 4px !important;
+    }
+    
+    .btn {
+        padding: 14px !important;
+        font-size: 15px !important;
+    }
+    
+    .mobile-btn {
+        width: 65px !important;
+        height: 65px !important;
+    }
+    
+    #btnShoot {
+        width: 75px !important;
+        height: 75px !important;
+    }
+}
+
+/* ============================================
+   MARGENES Y PADDING GLOBALES MEJORADOS
+   ============================================ */
+@media (max-width: 480px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        padding: 5px !important;
+        background-attachment: fixed !important;
+    }
+    
+    .game-container {
+        padding: 15px !important;
+        margin: 5px auto !important;
+    }
+    
+    .canvas-container {
+        margin: 15px 0 !important;
+    }
+    
+    .mobile-controls {
+        margin: 20px 0 !important;
+    }
+    
+    .button-group {
+        margin: 20px 0 10px 0 !important;
+    }
+}
+@media (max-width: 768px) {
+    body {
+        padding: 10px !important;
+    }
+    
+    .container {
+        padding: 25px 20px !important;
+        max-width: 360px !important;
+        margin: 0 auto !important;
+    }
+    
+    h1 {
+        font-size: 30px !important;
+    }
+    
+    .cat-icon {
+        font-size: 60px !important;
+    }
+    
+    .heart-icon {
+        font-size: 30px !important;
+    }
+    
+    .dedication-box {
+        padding: 18px 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .dedication-title {
+        font-size: 22px !important;
+    }
+    
+    .dedication-text {
+        font-size: 18px !important;
+    }
+    
+    .instructions {
+        padding: 18px 15px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .instruction-item {
+        font-size: 14px !important;
+        margin: 12px 0 !important;
+    }
+    
+    .play-button {
+        padding: 18px 30px !important;
+        font-size: 18px !important;
+        max-width: 280px !important;
+        margin-top: 25px !important;
+    }
+}
     </style>
 </head>
 <body>
